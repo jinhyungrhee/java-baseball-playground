@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.InputStream;
 import java.util.stream.IntStream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class StringTest {
     @Test
@@ -33,11 +32,10 @@ public class StringTest {
     }
 
     @Test
-    @DisplayName("Test Exception")
-    void 요구사항3() {
+    @DisplayName("Test Exception1")
+    void 요구사항3_1() {
 
         assertThatThrownBy(() -> {
-
             IntStream.range(0, 4).forEach(index -> {
                 try {
                     System.out.println("abc".charAt(index));
@@ -45,8 +43,24 @@ public class StringTest {
                     throw new IndexOutOfBoundsException("BOOM!");
                 }
             });
-
         }).isInstanceOf(IndexOutOfBoundsException.class).hasMessageContaining("BOOM!");
+    }
 
+    @Test
+    @DisplayName("Test Excpetion2")
+    void 요구사항3_2() {
+
+        String actual = "abc";
+
+        assertThatExceptionOfType(IndexOutOfBoundsException.class)
+                .isThrownBy(() -> {
+                    IntStream.range(0, 4).forEach(index -> {
+                        try {
+                            System.out.println("abc".charAt(index));
+                        } catch(Exception e) {
+                            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + "abc".length());
+                        }
+                    });
+                }).withMessageMatching("Index: \\d+, Size: \\d+");
     }
 }
