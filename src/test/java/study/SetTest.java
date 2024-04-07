@@ -3,10 +3,12 @@ package study;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -40,5 +42,25 @@ public class SetTest {
     void 요구사항2(int number) {
         assertThat(numbers.contains(number)).isTrue();
     }
+
+    @ParameterizedTest
+    @CsvSource(value = {"1:true", "2:true", "3:true", "4:false", "5:false"},delimiter = ':')
+    void 요구사항3(String input, String expected) {
+
+        int actualValue = Integer.parseInt(input);
+        assertThat(numbers.contains(actualValue)).isEqualTo(Boolean.parseBoolean(expected));
+
+        // System.out.println("number : " + input + ", expected : " + expected + ", actual : " + numbers.contains(actualValue));
+        /**
+         * number : 1, expected : true, actual : true
+         * number : 2, expected : true, actual : true
+         * number : 3, expected : true, actual : true
+         * number : 4, expected : false, actual : false
+         * number : 5, expected : false, actual : false
+         */
+
+    }
+
+
 
 }
