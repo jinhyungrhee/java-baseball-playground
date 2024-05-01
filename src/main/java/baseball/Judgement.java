@@ -4,11 +4,13 @@ import java.util.List;
 
 public class Judgement {
 
-    private int correctCount(List<Integer> computer, List<Integer> player) {
-        return 0;
+    public int correctCount(List<Integer> computer, List<Integer> player) {
+
+        return (int) computer.stream().filter(player::contains).count();
+
     }
 
-    private boolean hasPlace(List<Integer> numbers, int index, int number) {
+    public boolean hasPlace(List<Integer> numbers, int index, int number) {
         return false;
     }
 
