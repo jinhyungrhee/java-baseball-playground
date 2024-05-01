@@ -11,7 +11,7 @@ public class Judgement {
     }
 
     public boolean hasPlace(List<Integer> numbers, int index, int number) {
-        return false;
+        return numbers.get(index) == number;
     }
 
 }
